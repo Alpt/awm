@@ -1,0 +1,61 @@
+- 0.0.7
+
+* If inside the current X there's just one Y and you delete it, then 
+  the current X will be deleted too.
+
+* New feature: the terminals opened in new workspaces are
+  preemptive. Awm keeps one terminal already launched, so when you move on
+  a new workspace it just unhides the terminal window and launches another 
+  hidden terminal. This gives a great speed gain.
+
+* Using  "exec xsetroot -mod 0 0" instead of "exec xsetbg /.../black"
+
+* Some bugs fixed.
+
+- 0.0.6
+
+* You can insert a new X (Y) between two consecutive Xs (Ys).
+  For example, if you are in Y2 and there's already Y3, by pressing 
+  Ctrl+Alt+Return, a new Y between Y2 and Y3 is created.
+  The same is for the X with Alt+Shift+Return.
+
+* bug of TileOnTheFly fixed
+
+* Code cleaned
+
+- 0.0.5
+
+* Changed the binary name from dwm to awm
+
+* xterm is now launched when awm is started and no windows are alive.
+
+* published on freshmeat
+
+- 0.0.4
+
+Committed revision 1231.
+
+* Tiling on the fly:
+  The windows can be ordered on the fly with the tiling algorithm of dwm,
+  and then restored. This is useful to get a quick glimpse of the current
+  workspace.
+  
+  By pressing (right)Crtl+(left)Alt+Tab all the windows of the current Y are ordered
+  with the tiling algorithm of dwm. Re-pressing (right)Crtl+(left)Alt+Tab, the
+  windows will be restored to their pre-tile configuration.
+  This feature is useful to get a quick glimpse of the current Y.
+
+- 0.0.3
+
+* added PROC_DWM. It lists in /tmp/proc_dmw all the window titles, with the
+  window coordinate in the Virtual Worspaces.
+
+* removed draw_square
+
+* changed colors a bit
+
+* ...
+
+- 0.0.2
+
+* something

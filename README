@@ -1,0 +1,182 @@
+			    alpt-wm
+		http://freaknet.org/alpt/src/alpt-wm
+        svn co http://dev.hinezumi.org/svnroot/alpt-wm
+
+
+alpt-wm - dynamic window manager
+================================
+This is my custom, window manager. It's small, functional and fast.
+It is based on dwm ( http://www.suckless.org/wiki/dwm ) and it is just ~1800
+lines of code.
+
+Keep in mind that awm is just my own wm, it isn't a fork.
+(there isn't a single line of code I don't use).
+If you want something, just hack the code and then send it to me!
+If I find something interesting in your code I'll take it ;) 
+(Code exchange is wonderful)
+
+
+- AlpT (@freaknet.org)
+
+Features
+========
+[*] It is based on the workspace concept, but the space is two dimensional
+[*] Each time you move to a new, unvisited workspace, a terminal window is
+    automatically launched, emulating TTYs' behavior
+[*] You can delete an entire workspace, killing all the window launched in it.
+    You can even delete an entire dimension, deleting all the residing
+    workspaces.
+[*] You can insert a new X (Y) between two consecutive Xs (Ys).
+    A useful application is to create a new temporary workspace, that is going
+    to be destroyed soon.
+[*] The windows can be ordered on the fly with the tiling algorithm of dwm,
+    and then restored. This is useful to get a quick glimpse of the current
+    workspace.
+[*] When you drag a window, the window doesn't move, only the cursor
+    does. This is faster.
+    To resize the window, you just Alt+RightClick on any point of the screen,
+    and the window will immediately resize to cover the space between the
+    mouse cursor and the nearest window border. If you click inside the window
+    you'll cover the negative space!
+[*] Proc-like interface: /tmp/proc_awm
+
+
+Usage
+=====
+I hope you're accustomed to virtual work spaces.
+The system here is similar, but we have a second dimension:
+
+	   X 1   X 2   X 3  X 4  ...
+	  -----------------------------
+	   Y|1   Y|1   Y|1  Y|1
+	   Y|2   Y|2   Y|2  Y|2
+	   Y|3   Y|3   Y|3  Y|3
+	   Y|4   Y|4   Y|4  Y|4
+	    :     :     :    :
+	    :     :     :    :
+
+[*]
+This system is very fast and comfortable, because you can use each X for a
+specific purpose. F.e, in X1 you execute only system programs, in X2 you work
+on your C projects, in X3 you play with stupid things (firefox, mplayer,
+gqview).
+
+
+Using Ctrl+Alt+b, the bar will appear. It indicates your current coordinate.
+
+With Ctrl+Alt+(Left or Right) you move on the Y of your current X.
+
+With Shift+Alt+(Up or Down) you move on the X 
+ (the Y is set to your last visited Y on the selected X)
+
+With Shit+Alt+Fn you go directly to the X `n'.
+ (note, if you have only n Xs and you go to m > n, then you'll end up in n+1) 
+With Alt+Fn you go directly to the Y `n'.
+ (note, the same previous note)
+
+[*] Each time you move on a new, non visited, coordinate, a terminal window will be
+automatically launched. This is very useful.
+
+To launch a new terminal, use Ctrl+Alt+] or Ctrl+Alt+h 
+ (the various key bindings are in config.h).
+
+[*] If you ever loose a window, take a look at /tmp/proc_awm ;)
+
+...
+
+[*] And now, you can delete an entire Y, killing all the window launched in it, or
+you can delete an entire X, deleting all its sub-Y!!! Be careful with this ;)
+ delete Y -> Ctrl+Alt+d
+ delete X -> Shift+Alt+d
+(note, if inside the current X there's just one Y and you delete it, then the
+current X will be deleted too)
+  
+
+Alt+Up maximize/minimize the current focused window.
+ (a maximised window will cover the bar).
+
+Alt+c kills the current focused window.
+
+Alt+< and Alt+/  cycles the focus of the windows in the current Y.
+Alt+Tab cycles from the current to the previous window.
+
+
+[*]
+To move a window, Alt+click+drag it.
+  (note, the dragging of the window isn't continuous: only the mouse cursor is
+   moved until you release the drag.)
+To resize a window, Alt+righ_click on any point of the screen. The window will
+immediately resize to cover the space between the mouse cursor and the nearest 
+window border. If you click inside the window you'll cover the negative space,
+thus shrinking it! :)
+
+
+[*]
+By pressing (right)Crtl+(left)Alt+Tab all the windows of the current Y are ordered
+with the tiling algorithm of dwm. Re-pressing (right)Crtl+(left)Alt+Tab, the 
+windows will be restored to their pre-tile configuration.
+  (the focus order of the windows is also considered during the tiling: the 
+   biggest window is the current focused, the second biggest is the second in the 
+   focus cycle, etc.)
+This feature is useful to get a quick glimpse of the current Y.
+
+
+[*]
+You can insert a new X (Y) between two consecutive Xs (Ys).
+A useful application is to create a new temporary workspace, that is going
+to be destroyed soon.
+For example, if you are in Y2 and there's already Y3, by pressing 
+Ctrl+Alt+Return, a new Y between Y2 and Y3 is created.
+The same is for the X with Alt+Shift+Return.
+
+
+Ctrl+Shift+Alt+(Left or Right)  moves the current focused window on the
+previous/next Y. 
+Ctrl+Shift+Alt+(Up or Down)  moves the current focused window on the
+previous/next X. 
+
+Shift+Alt+n  moves the current focused window directly to X n.
+ (note, if you have only n Xs and you go to m > n, then you'll end up in n+1) 
+Ctrl+Alt+n  moves the current focused window directly to Y n.
+ (note, the same previous note)
+
+Installation
+------------
+Get the latest sources:
+   svn co http://dev.hinezumi.org/svnroot/alpt-wm/ alpt-wm
+(or tarball http://www.freaknet.org/alpt/src/alpt-wm/tarball/awm-0.0.4.tar.bz2 )
+
+In order to build awm you need the Xlib header files.
+
+Edit (with care) config.h as you please.
+
+Edit scripts/*
+
+Copy awm and scripts/* somewhere in your $PATH.
+
+If you want to use startx, then just do:
+	echo exec awm >> ~/.xinitrc
+otherwise, manually launch:
+	X& DISPLAY=":0" awm&
+
+
+If you want to use fdock (just launch ./fdock to see what it is), modify
+FD_IFACE in fdock.c, run make again, copy ./fdock in your $PATH and use:
+	X& fdock | DISPLAY=":0" awm&
+or put this in .xinitrc:
+	exec fdock | awm
+
+
+Notes
+-----
+
+Interesting fact: the terminals opened in new workspaces are
+preemptive. Awm keeps one terminal already launched, so when you move on
+a new workspace it just unhides the terminal window and launches another 
+hidden terminal. This gives a great speed gain. 
+
+Tips: define your own key bindins in config.h. In this way, you don't need
+to use xlock.
+
+SPAM: you may be interested in closebracket:
+http://www.freaknet.org/alpt/src/utils/closebracket

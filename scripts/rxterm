@@ -1,0 +1,9 @@
+#!/bin/sh
+rxvt  +vb  +sb  -sl 9048 -C -tn rxvt \
+	-fn '-misc-fixed-medium-r-normal--20-*-*-*-*-*-*-1' \
+	-background black -foreground white 		\
+	"$@"
+#	-xrm "XTerm*eightBitInput:False" 		\
+#	-xrm "XTerm*metaSendsEscape:True" 		\
+#	-xrm "XTerm*altSendsEscape:True" 		\
+#	-xrm "XTerm*altIsNotMeta:True" 			\
